@@ -1,0 +1,47 @@
+{
+  "name": "zkPhoto",
+  "version": "1.0.0",
+  "description": "Private authenatic photo sharing using ZKP",
+  "scripts": {
+    "compile:contracts": "npx hardhat compile",
+    "develop": "npx hardhat node",
+    "deploy:localhost": "npx hardhat deploy --tags complete",
+    "test": "npx hardhat test",
+    "compile:circuits": "bash scripts/compile-circuits.sh",
+    "verifier:fix": "node scripts/bump-solidity",
+    "test:fullProof": "npm run compile:circuits && npm run verifier:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image",
+    "preprocess:image": "node scripts/slice-image && bash scripts/png2json.sh",
+    "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image",
+    "generate:proof": "bash scripts/generate-proof.sh",
+    "setup:circom": "bash scripts/setup-circom.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/socathie/zkPhoto.git.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/socathie/zkPhoto.git/issues"
+  },
+  "homepage": "https://github.com/socathie/zkPhoto.git#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
+    "@nomiclabs/hardhat-waffle": "^2.0.2",
+    "chai": "^4.3.6",
+    "circomlib": "^2.0.2",
+    "circomlibjs": "^0.1.1",
+    "combine-image": "^1.0.3",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.5.4",
+    "get-pixels": "^3.3.3",
+    "hardhat": "^2.8.3",
+    "hardhat-contract-sizer": "^2.4.0",
+    "hardhat-deploy": "^0.10.4",
+    "save-pixels": "^2.3.6",
+    "sharp": "^0.30.0",
+    "snarkjs": "^0.4.13",
+    "zeros": "^1.0.0"
+  }
+}
