@@ -9,7 +9,7 @@
     "test": "npx hardhat test",
     "compile:circuits": "bash scripts/compile-circuits.sh",
     "verifier:fix": "node scripts/bump-solidity",
-    "test:fullProof": "npm run compile:circuits && npm run verifier:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image",
+    "test:fullProof": "npm run compile:circuits && npm run verifier:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npx hardhat test",
     "preprocess:image": "node scripts/slice-image && bash scripts/png2json.sh",
     "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image",
     "generate:proof": "bash scripts/generate-proof.sh",
