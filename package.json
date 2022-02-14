@@ -11,7 +11,7 @@
     "verifier:fix": "node scripts/bump-solidity",
     "test:fullProof": "npm run compile:circuits && npm run verifier:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npx hardhat test",
     "preprocess:image": "node scripts/slice-image && bash scripts/png2json.sh",
-    "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image",
+    "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image && node scripts/png2svg",
     "generate:proof": "bash scripts/generate-proof.sh",
     "setup:circom": "bash scripts/setup-circom.sh"
   },
@@ -40,9 +40,11 @@
     "hardhat": "^2.8.3",
     "hardhat-contract-sizer": "^2.4.0",
     "hardhat-deploy": "^0.10.4",
+    "hardhat-gas-reporter": "^1.0.7",
     "save-pixels": "^2.3.6",
     "sharp": "^0.30.0",
     "snarkjs": "^0.4.13",
+    "svg-png-converter": "^0.0.9",
     "zeros": "^1.0.0"
   }
 }

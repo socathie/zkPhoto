@@ -120,3 +120,4 @@ circuits/archive
 scripts/archive
 *.ptau
 input.json
+contracts/archive
