@@ -8,10 +8,10 @@
     "deploy:localhost": "npx hardhat deploy --tags complete",
     "test": "npx hardhat test",
     "compile:circuits": "bash scripts/compile-circuits.sh",
-    "verifier:fix": "node scripts/bump-solidity",
-    "test:fullProof": "npm run compile:circuits && npm run verifier:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npx hardhat test",
+    "version:fix": "node scripts/bump-solidity",
+    "test:fullProof": "npm run compile:circuits && npm run version:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npx hardhat test",
     "preprocess:image": "node scripts/slice-image && bash scripts/png2json.sh",
-    "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image && node scripts/png2svg",
+    "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image && node scripts/png2json output && node scripts/png2base64",
     "generate:proof": "bash scripts/generate-proof.sh",
     "setup:circom": "bash scripts/setup-circom.sh"
   },
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
     "@nomiclabs/hardhat-waffle": "^2.0.2",
-    "@openzeppelin/contracts": "^4.5.0",
+    "@openzeppelin/contracts": "^3.4.2",
     "chai": "^4.3.6",
     "circomlib": "^2.0.2",
     "circomlibjs": "^0.1.1",
@@ -45,6 +45,7 @@
     "sharp": "^0.30.0",
     "snarkjs": "^0.4.13",
     "svg-png-converter": "^0.0.9",
+    "web3-utils": "^1.7.0",
     "zeros": "^1.0.0"
   }
 }

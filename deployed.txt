@@ -1,0 +1,2 @@
+deploying "Verifier" (tx: 0xfb2a2b22a60bbf2a22ed24875ff78253da7b1bb8d623529d79d1b119d56fbec1)...: deployed at 0xBbc682976A627e5c7C7279024293b1F89Bf5908f with 4108068 gas
+deploying "zkPhoto" (tx: 0x2cf6ac468bbb32342093ba80bb8ae936cacb1d096a680eef80f6687a267cecc0)...: deployed at 0x086791179b2Bb1944bECf8a049D7D438e7babCfB with 4222250 gas
