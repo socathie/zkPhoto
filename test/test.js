@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const fs = require('fs');
-const tokenURI = require('./token.json');
+const fs = require("fs");
+const tokenURI = require("./token.json");
 const { toHex } = require("web3-utils");
 /*
 describe("Verifier Contract", function () {
@@ -16,7 +16,7 @@ describe("Verifier Contract", function () {
 
     it("Should return true for correct proofs", async function () {
         for (var i = 0; i < 16; i++) {
-            var array = JSON.parse("[" + fs.readFileSync('./circuits/build/zkPhoto/' + i.toString() + '/call.json') + "]");
+            var array = JSON.parse("[" + fs.readFileSync("./circuits/build/zkPhoto/" + i.toString() + "/call.json") + "]");
             expect(await verifier.verifyProof(array[0], array[1], array[2], array[3])).to.be.true;
         }
     });
@@ -36,9 +36,12 @@ describe("zkPhoto Contract", function () {
     let b = [];
     let c = [];
     let d = [];
+    let signers;
+    let balance;
+    let tx;
 
     for (var i = 0; i < 16; i++) {
-        var array = JSON.parse("[" + fs.readFileSync('./circuits/build/zkPhoto/' + i.toString() + '/call.json') + "]");
+        var array = JSON.parse("[" + fs.readFileSync("./circuits/build/zkPhoto/" + i.toString() + "/call.json") + "]");
         a.push(array[0]);
         b.push(array[1]);
         c.push(array[2]);
@@ -53,37 +56,43 @@ describe("zkPhoto Contract", function () {
         zkphoto = await zkPhoto.deploy(verifier.address);
         await zkphoto.deployed();
 
+        signers = await ethers.getSigners();
+        balance = await signers[0].getBalance();
+
         let txn = await zkphoto.mint(tokenURI.name, tokenURI.description, tokenURI.image, a, b, c, d);
-        await txn.wait();
+        tx = await txn.wait();
     });
 
-    it("mint an NFT given a snarkjs proof", async function () {
-        let signers = await ethers.getSigners();
-        let balance = await signers[0].getBalance();
-
-        let txn = await zkphoto.mint(tokenURI.name, tokenURI.description, tokenURI.image, a, b, c, d);
-        let tx = await txn.wait();
-        expect(tx.confirmations).to.be.greaterThan(0);
-
+    it("mint success", async function () {
         console.log("Cost to mint an NFT: ", balance - await signers[0].getBalance());
-        //console.log(result);
+        expect(tx.confirmations).to.be.greaterThan(0);
     });
 
     it("cannot mint an NFT given an invalid proof", async function () {
         let _a = Array(16).fill([0, 0]);
-        await zkphoto.mint(tokenURI.name, tokenURI.description, tokenURI.image, _a, b, c, d)
+        let _d = Array(16).fill(Array(65).fill(0));
+        await zkphoto.mint(tokenURI.name, tokenURI.description, tokenURI.image, _a, b, c, _d)
             .catch((error) => {
                 errorString = error.toString();
             });
-        expect(errorString).to.have.string('Invalid proof');
+        expect(errorString).to.have.string("Invalid proof");
+    });
+
+    it("cannot mint a image that is already minted", async function () {
+        await zkphoto.mint(tokenURI.name, tokenURI.description, tokenURI.image, a, b, c, d)
+        .catch((error) => {
+            errorString = error.toString();
+        });
+        expect(errorString).to.have.string("Image already exists");
     });
 
     it("check minted token uri", async function () {
         var result = await zkphoto.tokenURI(1);
-        let json = JSON.parse(Buffer.from(result.split(',')[1], 'base64').toString('ascii'));
+        let json = JSON.parse(Buffer.from(result.split(",")[1], "base64").toString("ascii"));
         expect(json.name).to.equal(tokenURI.name);
         expect(json.description).to.equal(tokenURI.description);
         expect(json.image).to.equal(tokenURI.image);
+        expect(json.external_url).to.equal("https://zkPhoto.one");
     });
 
     it("extract the low res image from the contract URI given an id", async function () {

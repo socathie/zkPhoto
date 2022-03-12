@@ -1,15 +1,15 @@
 {
   "name": "zkPhoto",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Private authenatic photo sharing using ZKP",
   "scripts": {
-    "compile:contracts": "npx hardhat compile",
+    "compile:contracts": "npx hardhat compile --force",
     "develop": "npx hardhat node",
     "deploy:localhost": "npx hardhat deploy --tags complete",
     "test": "npx hardhat test",
     "compile:circuits": "bash scripts/compile-circuits.sh",
     "version:fix": "node scripts/bump-solidity",
-    "test:fullProof": "npm run compile:circuits && npm run version:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npx hardhat test",
+    "test:fullProof": "npm run compile:circuits && npm run version:fix && npm run preprocess:image && npm run generate:proof && npm run postprocess:image && npm run compile:contracts && npx hardhat test",
     "preprocess:image": "node scripts/slice-image && bash scripts/png2json.sh",
     "postprocess:image": "bash scripts/json2png.sh && node scripts/combine-image && node scripts/png2json output && node scripts/png2base64",
     "generate:proof": "bash scripts/generate-proof.sh",
