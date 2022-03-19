@@ -4,10 +4,9 @@ This project demonstrates a small stepping stone toward #2 of [Brian Gu’s Six 
 
 The contract has already been deployed on Harmony testnet and the first NFT has been minted.
 
+[ERC721 contract on testnet](https://explorer.pops.one/address/0x0346849160a9b74887c29ae946f73a8bf7ae2588)
 
-![ERC721 contract on testnet](contract.png)
-
-For more details on the development, click [here](https://harmonyone.notion.site/zkPhoto-Private-Authentic-Photo-Sharing-a3b8d643bded4e80a775112f76ab5a3a).
+For more details on the development and demo videos, click [here](https://open.harmony.one/funding/1000-contributors-78m/cathie-so/zkphoto-private-authentic-photo-sharing).
 
 Run `npm i` to install. 
 
@@ -28,5 +27,3 @@ You can try minting the sample image by running:
 ```shell
 npx hardhat run scripts/mint-sample.js --network testnet
 ```
-
-![1st NFT on zkPhoto](nft.png)
