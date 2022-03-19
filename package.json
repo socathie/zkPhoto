@@ -1,5 +1,5 @@
 {
-  "name": "zkPhoto",
+  "name": "zk-photo",
   "version": "2.0.0",
   "description": "Private authenatic photo sharing using ZKP",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/socathie/zkPhoto.git.git"
+    "url": "https://github.com/socathie/zkPhoto.git"
   },
   "keywords": [],
   "author": "",
