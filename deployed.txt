@@ -1,2 +1,2 @@
-deploying "Verifier" (tx: 0xd4a49199d5c90fafc90d9851e88a74abdd1522ba8e962181a3d4e4007fd7cb64)...: deployed at 0x640a545Ad3B375d3444Da9C6CA227D728f489AfF with 4108056 gas
-deploying "zkPhoto" (tx: 0xc03da059e970c684e54c4bab5e9a7ce8e113ce0484bec3fc83537bdb1a07d420)...: deployed at 0x764e2851aCD4dA43f580905b05c6fBccF52Bc074 with 4355128 gas
+deploying "Verifier" (tx: 0x14b7509fbc422ca4808b44ddab27c998ae3f5071edcd32670fd65aa81d706376)...: deployed at 0xd5F24f3D7805C6280240002b5E20719464eA6974 with 4108068 gas
+deploying "zkPhoto" (tx: 0x25f6be1b991fb69c26a1103ff3ff2e7044b99a2781f9917549916ad7e093d643)...: deployed at 0x0346849160A9B74887C29Ae946F73a8bF7AE2588 with 4355116 gas

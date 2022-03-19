@@ -111,9 +111,7 @@ typechain
 
 #Hardhat files
 cache
-artifacts
 deployments
-circuits/build
 image/slice*.*
 image/o*.*
 circuits/archive
@@ -121,3 +119,5 @@ scripts/archive
 *.ptau
 input.json
 contracts/archive
+circuits/build/zkPhoto/*/*.*
+artifacts
