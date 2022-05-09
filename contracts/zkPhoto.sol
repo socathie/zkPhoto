@@ -38,6 +38,24 @@ contract zkPhoto is ERC721 {
     }
 
     /**
+     * @dev check invalid characters in input string
+     * @param String input string to be checked
+     */
+    function HasQuotationMark(
+        string calldata String
+    ) private pure returns (bool) {
+        bytes calldata StringBytes = bytes(String);
+        bytes1 quote = bytes1("\"");
+        uint256 length = StringBytes.length;
+        for (uint256 i = 0; i < length; ++i) {
+            if (StringBytes[i]==quote) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @dev generateTokenURI based on input
      * @param name name in tokenURI
      * @param description description in tokenURI
@@ -93,11 +111,13 @@ contract zkPhoto is ERC721 {
         uint256[2][16] calldata c,
         uint256[65][16] calldata input
     ) public returns (uint256) {
+        require(!HasQuotationMark(name) && !HasQuotationMark(description) && !HasQuotationMark(image), "Invalid metadata");
+
         bytes32 _hash = generateHash(input);
 
         require(!hashExists[_hash], "Image already exists");
 
-        for (uint256 i = 0; i < 16; i++) {
+        for (uint256 i = 0; i < 16; ++i) {
             uint256[2] memory _a = [a[i][0], a[i][1]];
             uint256[2][2] memory _b = [
                 [b[i][0][0], b[i][0][1]],
@@ -105,7 +125,7 @@ contract zkPhoto is ERC721 {
             ];
             uint256[2] memory _c = [c[i][0], c[i][1]];
             uint256[65] memory _input;
-            for (uint256 j = 0; j < 65; j++) {
+            for (uint256 j = 0; j < 65; ++j) {
                 _input[j] = input[i][j];
             }
             require(
